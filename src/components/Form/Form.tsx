@@ -2,7 +2,8 @@
 import { useState } from "react";
 import Input from "./Input";
 import InputPhone from "./InputPhone";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 interface formProps {
   onClose?: () => void;
 }
@@ -19,11 +20,18 @@ function Form(props: formProps) {
             e.preventDefault();
             try {
               if (name.length <= 2) {
-                alert("O nome deve ter mais de 2 letras");
+                toast.info("O nome deve ter mais de 2 letras!", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
                 return;
               }
               if (phone.length < 10) {
-                alert("O número de telefone deve ter pelo menos 10 dígitos");
+                toast.info(
+                  "O número de telefone deve ter pelo menos 10 dígitos!",
+                  {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                  }
+                );
                 return;
               }
 
@@ -35,23 +43,28 @@ function Form(props: formProps) {
                 },
               });
 
-              if (res.status === 400) {
-                const data = await res.json();
-                if (data.message === "E-mail já cadastrado") {
-                  alert(
-                    "O e-mail já está registrado. Tente acessar sua conta."
-                  );
-                  return;
-                } else {
-                  alert("Conta criada com sucesso!");
-                }
+              const data = await res.json();
+              if (data.message === "E-mail já cadastrado") {
+                toast.warning(
+                  "O e-mail já está registrado. Tente acessar sua conta.",
+                  {
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                  }
+                );
+                return;
+              } else {
+                toast.success("Conta criada com sucesso!", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
               }
             } catch (error) {
               console.error("Erro ao processar a solicitação:", error);
-              alert("Algo deu errado, tente novamente!");
+              toast.error("Algo deu errado, tente novamente!", {
+                position: toast.POSITION.BOTTOM_RIGHT,
+              });
             }
           }}
-          className="rounded-md py-10 bg-surface-500/95 p-2 ring-1 ring-white/10 max-w-sm text-center h-auto "
+          className="rounded-md py-10 bg-surface-500/95 p-2 ring-1 ring-white/10 max-w-sm text-center h-auto"
         >
           <h3 className="h3 text-3xl font-semibold">Crie sua conta</h3>
           <div>
@@ -91,6 +104,7 @@ function Form(props: formProps) {
             Criando sua conta BIMACHINE você aceita os nossos {""}
             <a
               href="https://support.bimachine.com.br/termos-de-uso-e-servicos/"
+              target="_blank"
               className="text-tertiary-500 font-medium"
             >
               Termos de Uso e Serviços
@@ -98,6 +112,7 @@ function Form(props: formProps) {
           </p>
         </form>
       </div>
+      <ToastContainer />
     </>
   );
 }

@@ -11,10 +11,15 @@ import Modal from "./Modal";
 import Form from "./Form/Form";
 
 function Features() {
-  const [modal, setModal] = useState(false);
-  const [modalContent, setModalContent] = useState<React.ReactElement | null>(
-    null
-  );
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
   return (
     <section className="flex md:flex-row flex-col justify-center">
       <div className="text-center justify-center">
@@ -58,16 +63,14 @@ function Features() {
           />
         </div>
         <button
+          onClick={openModal}
           className="btn btn-xl variant-outline-primary hover:bg-primary-500 hover:text-black"
-          onClick={() => {
-            setModalContent(<Form onClose={() => setModal(false)} />);
-            setModal(true);
-          }}
         >
           Faça um teste grátis
         </button>
-        <Modal visible={modal} onClick={() => setModal(false)}>
-          {modalContent}
+
+        <Modal visible={modalVisible} onClose={closeModal}>
+          <Form />
         </Modal>
       </div>
     </section>
