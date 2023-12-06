@@ -1,8 +1,18 @@
 "use client";
-import { useState } from "react";
 import Form from "./Form/Form";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+} from "@nextui-org/react";
 
 function Principal() {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   return (
     <>
       <section className="flex md:flex-row flex-col justify-center min-h-screen">

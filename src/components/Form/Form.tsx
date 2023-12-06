@@ -18,6 +18,15 @@ function Form(props: formProps) {
           onSubmit={async (e) => {
             e.preventDefault();
             try {
+              if (name.length <= 2) {
+                alert("O nome deve ter mais de 2 letras");
+                return;
+              }
+              if (phone.length < 10) {
+                alert("O número de telefone deve ter pelo menos 10 dígitos");
+                return;
+              }
+
               const res = await fetch("/api/clients", {
                 method: "POST",
                 body: JSON.stringify({ name, email, phone }),
@@ -25,9 +34,20 @@ function Form(props: formProps) {
                   "Content-Type": "application/json",
                 },
               });
-              const data = await res.json();
-              alert("Conta criada com sucesso!");
+
+              if (res.status === 400) {
+                const data = await res.json();
+                if (data.message === "E-mail já cadastrado") {
+                  alert(
+                    "O e-mail já está registrado. Tente acessar sua conta."
+                  );
+                  return;
+                } else {
+                  alert("Conta criada com sucesso!");
+                }
+              }
             } catch (error) {
+              console.error("Erro ao processar a solicitação:", error);
               alert("Algo deu errado, tente novamente!");
             }
           }}
