@@ -26,7 +26,7 @@ function What() {
             text="Integração de dados de várias fontes facilmente."
           />
           <CardIcon
-            icon={<HiOutlineDocumentReport />}
+            icon={<HiOutlineDocumentReport className={"text-3xl"} />}
             text="Geração de relatórios personalizados e compreensíveis"
           />
           <CardIcon

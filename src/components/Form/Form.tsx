@@ -1,47 +1,63 @@
 "use client";
-import "react-phone-number-input/style.css";
 import { useState } from "react";
-import PhoneInput from "react-phone-number-input";
 import Input from "./Input";
 import InputPhone from "./InputPhone";
 
-function Form() {
-  const [value, setValue] = useState("");
+interface formProps {
+  onClose?: () => void;
+}
+
+function Form(props: formProps) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   return (
     <>
-      <div className="basis-1/2 flex justify-evenly h-[35rem]">
-        <form className="rounded-md py-10 bg-white/5 p-2 ring-1 ring-white/10 max-w-sm text-center h-auto">
+      <div className="basis-1/2 flex justify-evenly h-[35rem] ">
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            try {
+              const res = await fetch("/api/clients", {
+                method: "POST",
+                body: JSON.stringify({ name, email, phone }),
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+              const data = await res.json();
+              alert("Conta criada com sucesso!");
+            } catch (error) {
+              alert("Algo deu errado, tente novamente!");
+            }
+          }}
+          className="rounded-md py-10 bg-surface-500/95 p-2 ring-1 ring-white/10 max-w-sm text-center h-auto "
+        >
           <h3 className="h3 text-3xl font-semibold">Crie sua conta</h3>
           <div>
             <div className="py-5">
               <Input
                 id="email"
-                value="email"
+                value={email}
                 type="email"
                 autoComplete="email"
                 placeholder="E-mail"
                 title={"E-mail *"}
-                onChange={function (value: any): void {
-                  throw new Error("Function not implemented.");
-                }}
+                onChange={setEmail}
               />
               <Input
                 id="name"
-                value="name"
+                value={name}
                 type="text"
                 autoComplete="name"
                 placeholder="Nome ou empresa"
                 title={"Nome ou empresa *"}
-                onChange={function (value: any): void {
-                  throw new Error("Function not implemented.");
-                }}
+                onChange={setName}
               />
               <InputPhone
                 id={"phone"}
-                value={"phone"}
-                onChange={function (value: any): void {
-                  throw new Error("Function not implemented.");
-                }}
+                value={phone}
+                onChange={setPhone}
                 autoComplete={"phone"}
                 placeholder={"Telefone"}
                 title={"Telefone *"}

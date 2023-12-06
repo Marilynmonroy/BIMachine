@@ -6,8 +6,15 @@ import { MdOutlineSecurity } from "react-icons/md";
 import { MdOutlineSettingsSuggest } from "react-icons/md";
 
 import Card from "./cards/Card";
+import { useState } from "react";
+import Modal from "./Modal";
+import Form from "./Form/Form";
 
 function Features() {
+  const [modal, setModal] = useState(false);
+  const [modalContent, setModalContent] = useState<React.ReactElement | null>(
+    null
+  );
   return (
     <section className="flex md:flex-row flex-col justify-center">
       <div className="text-center justify-center">
@@ -23,36 +30,45 @@ function Features() {
             negócios.
           </p>
         </div>
-        <div className="flex items-center justify-evenly p-12 gap-10 h-72 mb-7">
+        <div className="flex items-center justify-evenly p-12 gap-10 h-72 mb-20">
           <Card
             className="hover: text-black"
             icon={<IoGitNetworkSharp />}
             title="Integração"
             text="Permite a integração de múltiplas fontes de dados, consolidando-as em um único local para uma análise mais completa e precisa."
+            href="https://support.bimachine.com/conectores-de-dados/"
           />
           <Card
             icon={<MdOutlineDashboardCustomize />}
             title="Dashboards"
             text="Facilita a criação de relatórios e painéis personalizados de forma intuitiva, permitindo uma visualização clara e compreensível dos dados."
+            href="https://support.bimachine.com/category/dashboards/"
           />
           <Card
             icon={<MdOutlineSecurity />}
             title="Segurança"
             text="Oferece funcionalidades robustas de segurança, permitindo um controle preciso sobre quem acessa quais dados, garantindo a privacidade."
+            href="https://support.bimachine.com/seguranca-no-compartilhamento-do-whatsapp/"
           />
           <Card
             icon={<MdOutlineSettingsSuggest />}
-            title="Gestão (EPM)"
+            title="Gestão (ERP)"
             text="Permite monitorar e gerenciar o desempenho empresarial por meio de indicadores e métricas, facilitando a tomada de decisões estratégicas."
+            href="https://support.bimachine.com/integracao-do-bi-com-o-erp/"
           />
         </div>
-        <a
-          href="https://www.bimachine.com.br/"
-          target="_blank"
-          className="btn variant-outline-primary hover:bg-primary-500 hover:text-black"
+        <button
+          className="btn btn-xl variant-outline-primary hover:bg-primary-500 hover:text-black"
+          onClick={() => {
+            setModalContent(<Form onClose={() => setModal(false)} />);
+            setModal(true);
+          }}
         >
-          VOY A SER UN MODAL DE REGISTRO
-        </a>
+          Faça um teste grátis
+        </button>
+        <Modal visible={modal} onClick={() => setModal(false)}>
+          {modalContent}
+        </Modal>
       </div>
     </section>
   );

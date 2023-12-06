@@ -4,8 +4,8 @@ export const myCustomTheme: CustomThemeConfig = {
   name: "biM-theme",
   properties: {
     // =~= Theme Properties =~=
-    "--theme-font-family-base": `Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'`,
-    "--theme-font-family-heading": `Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'`,
+    "--theme-font-family-base": `system-ui`,
+    "--theme-font-family-heading": `system-ui`,
     "--theme-font-color-base": "0 0 0",
     "--theme-font-color-dark": "255 255 255",
     "--theme-rounded-base": "8px",
@@ -13,7 +13,7 @@ export const myCustomTheme: CustomThemeConfig = {
     "--theme-border-base": "1px",
     // =~= Theme On-X Colors =~=
     "--on-primary": "0 0 0",
-    "--on-secondary": "0 0 0",
+    "--on-secondary": "255 255 255",
     "--on-tertiary": "0 0 0",
     "--on-success": "0 0 0",
     "--on-warning": "0 0 0",

@@ -12,7 +12,7 @@ export default function CardIcon(props: cardProps) {
     <div className="flex items-center gap-3 w-1/4">
       <button
         onClick={props.onClick}
-        className={`btn-icon w-[50px] h-[50px] font-size-[30px] line-heigth-[40px] bg-gradient-to-b from-white/5 ring-white/10 ring-1`}
+        className={`btn-icon w-[50px] h-[50px] font-size-[30px] line-heigth-[40px] bg-gradient-to-b from-white/5 ring-white/10 ring-1 btn-icon-xl bg-primary-500  text-black text-2xl`}
       >
         {props.icon}
       </button>

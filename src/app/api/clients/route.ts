@@ -1,15 +1,20 @@
 import { NextResponse } from "next/server";
-import prisma from "../../../../prisma/client";
+import { prisma } from "@/lib/prisma";
 
-export async function POST(request) {
-  const res = await request.json();
-  const { name, email, phone } = res;
-  const client = await prisma.client.create({
-    data: {
-      name,
-      email,
-      phone,
-    },
-  });
-  return NextResponse.json({ data: res });
+export async function POST(request: Request) {
+  try {
+    const { name, email, phone } = await request.json();
+    const createClient = await prisma.client.create({
+      data: {
+        name,
+        email,
+        phone,
+      },
+    });
+    return NextResponse.json({ createClient });
+  } catch (error) {
+    if (error instanceof Error) {
+      return NextResponse.json({ mesagge: error.message }, { status: 500 });
+    }
+  }
 }

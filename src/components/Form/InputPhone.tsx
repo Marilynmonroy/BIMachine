@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 
@@ -13,8 +14,8 @@ interface inputPhoneProps {
 
 function InputPhone(props: inputPhoneProps) {
   return (
-    <label className="pb-10 justify-items-center px-[78px]">
-      <span className="block text-sm font-medium text-left text-white pb-2  px-20">
+    <label className="py-4 justify-items-center px-[78px]">
+      <span className="block text-sm font-medium text-left text-white pb-2">
         {props.title}
       </span>
       <PhoneInput

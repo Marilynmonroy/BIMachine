@@ -36,7 +36,7 @@ export default function Card(props: cardProps) {
   const baseButtonStyle =
     "btn-icon btn-icon-xl bg-primary-500  text-black text-3xl";
   const enlargedButtonStyle =
-    "btn-icon btn-icon-xl bg-black text-primary transition-all";
+    "btn-icon btn-icon-xl bg-black text-primary-500 transition-all";
 
   return (
     <div
@@ -60,7 +60,7 @@ export default function Card(props: cardProps) {
         </p>
       </div>
       {isHovered && (
-        <a href={props.href} className="btn variant-filled">
+        <a href={props.href} target="_blank" className="btn variant-filled">
           Saiba mais
         </a>
       )}
