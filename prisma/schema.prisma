@@ -8,13 +8,13 @@ datasource db {
 }
 
 model Client {
-  id               String             @id @default(uuid())
-  name             String
-  email            String             @unique
-  phone            String
-  interest         Interests?         @relation(fields: [interestId], references: [id])
-  interestId       Int?               @unique
-  businessOnClient BusinessOnClient[]
+  id          String             @id @default(uuid())
+  name        String
+  email       String             @unique
+  phone       String
+  interest    Interests?         @relation(fields: [interestId], references: [id])
+  interestId  Int?               @unique
+  businessIds BusinessOnClient[]
 
   @@map("cliente")
 }
@@ -42,4 +42,5 @@ model BusinessOnClient {
   clientId   String
 
   @@id([businessId, clientId])
+  @@map("business_client")
 }

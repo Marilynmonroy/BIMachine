@@ -19,7 +19,7 @@ function Form(props: formProps) {
   const [businessIds, setBusinessIds] = useState<number[]>([]);
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0);
   const [interestData, setInterestData] = useState<any>(null);
   const [businessData, setBusinessData] = useState<any>(null);
 
@@ -37,20 +37,21 @@ function Form(props: formProps) {
   const prevStep = () => {
     setCurrentStep(currentStep - 1);
   };
-
+  const resetStep = () => {
+    if (currentStep === 2) {
+      setCurrentStep(currentStep - 0);
+    }
+  };
   const handleInterestSelection = (idInterest: number) => {
     setInterestId(idInterest);
     setInterestData(idInterest);
   };
 
-  useEffect(() => {}, [interestId]);
-
-  useEffect(() => {}, [interestData]);
-
   const handleBusinessSelection = (businessId: number) => {
     if (!businessIds.includes(businessId)) {
-      if (businessIds.length < 3) {
+      if (businessIds.length < 2) {
         setBusinessIds([...businessIds, businessId]);
+        setBusinessData(businessId);
       } else {
         toast.warning("Ya has seleccionado tres opciones", {
           position: toast.POSITION.BOTTOM_RIGHT,
@@ -108,8 +109,8 @@ function Form(props: formProps) {
                   name,
                   email,
                   phone,
-                  businessIds,
                   interestId,
+                  businessIds,
                 }),
                 headers: {
                   "Content-Type": "application/json",
@@ -185,14 +186,14 @@ function Form(props: formProps) {
             Crie sua conta
           </button>
           <Modal visible={modalVisible} onClose={closeModal}>
-            {currentStep === 1 && (
+            {currentStep === 0 && (
               <Interest
                 id={0}
                 onNextStep={nextStep}
                 onSelectInterest={handleInterestSelection}
               />
             )}
-            {currentStep === 2 && (
+            {currentStep === 1 && (
               <Business
                 id={0}
                 onNextStep={nextStep}
@@ -201,10 +202,19 @@ function Form(props: formProps) {
                 selectedInterest={interestId}
               />
             )}{" "}
-            {currentStep === 3 && (
-              <button type="submit" className="btn variant-filled-primary">
-                Hacer fetch
-              </button>
+            {currentStep === 2 && (
+              <div className="rounded-md py-10 bg-surface-500/95 p-2 ring-1 ring-white/10 w-full text-center h-auto">
+                <h3 className="h3 text-3xl font-semibold p-10">
+                  Estamos prontos!
+                </h3>
+                <button
+                  type="submit"
+                  className="btn variant-filled-primary"
+                  onClick={resetStep}
+                >
+                  Teste grátis
+                </button>
+              </div>
             )}
           </Modal>
           <p className="text-xs p-5 pb-0">

@@ -38,18 +38,14 @@ export async function POST(request: Request) {
         email,
         phone,
         interestId,
+        businessIds: {
+          connect: businessIds.map((businessId: number) => ({
+            id: businessId,
+          })),
+        },
       },
     });
-    if (businessIds && businessIds.length > 0) {
-      for (const businessId of businessIds) {
-        await prisma.businessOnClient.create({
-          data: {
-            businessId,
-            clientId: createClient.id,
-          },
-        });
-      }
-    }
+
     return NextResponse.json({ createClient });
   } catch (error) {
     if (error instanceof Error) {
