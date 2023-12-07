@@ -20,7 +20,7 @@ export default function Modal(props: ModalProps) {
           >
             <IoClose />
           </button>
-          <div className="modal-content p-1">{props.children}</div>
+          <div className="modal-content ">{props.children}</div>
         </div>
       </div>
     </div>

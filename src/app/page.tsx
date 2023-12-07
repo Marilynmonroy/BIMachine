@@ -1,11 +1,10 @@
-"use client";
-
 import Brands from "@/components/Brands";
 import Features from "@/components/Features";
 import Principal from "@/components/Principal";
 import Multiplataform from "@/components/Multiplataform";
 import Partner from "@/components/Partner";
 import What from "@/components/What";
+import Interest from "@/components/stepper/Interest";
 
 export default function Home() {
   return (
@@ -16,6 +15,7 @@ export default function Home() {
       <Features />
       <Multiplataform />
       <Brands />
+      <Interest />
     </main>
   );
 }

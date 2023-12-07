@@ -1,9 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "./Input";
 import InputPhone from "./InputPhone";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Modal from "../Modal";
+import Interest from "../stepper/Interest";
+import Business from "../stepper/Businesses";
 interface formProps {
   onClose?: () => void;
 }
@@ -12,6 +15,52 @@ function Form(props: formProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [interestId, setInterestId] = useState<number | null>(null);
+  const [businessIds, setBusinessIds] = useState<number[]>([]);
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [interestData, setInterestData] = useState<any>(null);
+  const [businessData, setBusinessData] = useState<any>(null);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+  const nextStep = () => {
+    setCurrentStep(currentStep + 1);
+  };
+
+  const prevStep = () => {
+    setCurrentStep(currentStep - 1);
+  };
+
+  const handleInterestSelection = (idInterest: number) => {
+    setInterestId(idInterest);
+    setInterestData(idInterest);
+  };
+
+  useEffect(() => {}, [interestId]);
+
+  useEffect(() => {}, [interestData]);
+
+  const handleBusinessSelection = (businessId: number) => {
+    if (!businessIds.includes(businessId)) {
+      if (businessIds.length < 3) {
+        setBusinessIds([...businessIds, businessId]);
+      } else {
+        toast.warning("Ya has seleccionado tres opciones", {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+      }
+    } else {
+      setBusinessIds(businessIds.filter((id) => id !== businessId));
+    }
+  };
+
   return (
     <>
       <div className="basis-1/2 flex justify-evenly h-[35rem] ">
@@ -34,16 +83,42 @@ function Form(props: formProps) {
                 );
                 return;
               }
-
+              if (interestId === null || interestId < 1) {
+                toast.info("Tiene que tener un interés seleccionado.", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
+                return;
+              }
+              if (businessIds.length < 1) {
+                toast.info("Tiene que tener un negocio!", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
+                return;
+              }
+              console.log("Información a enviar:", {
+                name,
+                email,
+                phone,
+                interestId,
+                businessIds,
+              });
               const res = await fetch("/api/clients", {
                 method: "POST",
-                body: JSON.stringify({ name, email, phone }),
+                body: JSON.stringify({
+                  name,
+                  email,
+                  phone,
+                  businessIds,
+                  interestId,
+                }),
                 headers: {
                   "Content-Type": "application/json",
                 },
               });
 
               const data = await res.json();
+              console.log(data);
+
               if (data.message === "E-mail já cadastrado") {
                 toast.warning(
                   "O e-mail já está registrado. Tente acessar sua conta.",
@@ -53,12 +128,17 @@ function Form(props: formProps) {
                 );
                 return;
               } else {
+                console.log(data);
+
                 toast.success("Conta criada com sucesso!", {
                   position: toast.POSITION.BOTTOM_RIGHT,
                 });
+                closeModal();
               }
             } catch (error) {
               console.error("Erro ao processar a solicitação:", error);
+              console.log(error);
+
               toast.error("Algo deu errado, tente novamente!", {
                 position: toast.POSITION.BOTTOM_RIGHT,
               });
@@ -97,9 +177,36 @@ function Form(props: formProps) {
               />
             </div>
           </div>
-          <button type="submit" className="btn variant-filled-primary ">
+          <button
+            type="button"
+            className="btn variant-filled-primary"
+            onClick={openModal}
+          >
             Crie sua conta
           </button>
+          <Modal visible={modalVisible} onClose={closeModal}>
+            {currentStep === 1 && (
+              <Interest
+                id={0}
+                onNextStep={nextStep}
+                onSelectInterest={handleInterestSelection}
+              />
+            )}
+            {currentStep === 2 && (
+              <Business
+                id={0}
+                onNextStep={nextStep}
+                prevStep={prevStep}
+                onSelectBusiness={handleBusinessSelection}
+                selectedInterest={interestId}
+              />
+            )}{" "}
+            {currentStep === 3 && (
+              <button type="submit" className="btn variant-filled-primary">
+                Hacer fetch
+              </button>
+            )}
+          </Modal>
           <p className="text-xs p-5 pb-0">
             Criando sua conta BIMACHINE você aceita os nossos {""}
             <a
