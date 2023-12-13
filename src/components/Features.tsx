@@ -35,7 +35,7 @@ function Features() {
             negócios.
           </p>
         </div>
-        <div className="flex items-center justify-evenly p-12 gap-10 h-72 mb-20">
+        <div className="flex items-center justify-evenly p-12 gap-10 h-72 mb-20 ">
           <Card
             className="hover: text-black"
             icon={<IoGitNetworkSharp />}
@@ -64,7 +64,7 @@ function Features() {
         </div>
         <button
           onClick={openModal}
-          className="btn btn-xl variant-outline-primary hover:bg-primary-500 hover:text-black"
+          className="btn btn-xl variant-outline-primary hover:bg-primary-500 hover:text-black transition duration-150 shadow-lg shadow-primary-700/40"
         >
           Faça um teste grátis
         </button>

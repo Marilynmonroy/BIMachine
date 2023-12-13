@@ -16,7 +16,7 @@ function Principal() {
             <a
               href="https://www.bimachine.com.br/"
               target="_blank"
-              className="btn variant-outline-primary hover:bg-primary-500 hover:text-black"
+              className="btn variant-outline-primary hover:bg-primary-500 hover:text-black transition duration-150 shadow-lg shadow-primary-700/40"
             >
               Saiba mais
             </a>

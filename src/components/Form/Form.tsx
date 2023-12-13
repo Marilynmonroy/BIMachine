@@ -24,7 +24,13 @@ function Form(props: formProps) {
   const [businessData, setBusinessData] = useState<any>(null);
 
   const openModal = () => {
-    setModalVisible(true);
+    if (name.trim() === "" || email.trim() === "" || phone.trim() === "") {
+      toast.error("Por favor, preencha todos os campos obrigatórios.", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+    } else {
+      setModalVisible(true);
+    }
   };
 
   const closeModal = () => {
@@ -49,7 +55,7 @@ function Form(props: formProps) {
 
   const handleBusinessSelection = (businessId: number) => {
     if (!businessIds.includes(businessId)) {
-      if (businessIds.length < 2) {
+      if (businessIds.length < 3) {
         setBusinessIds([...businessIds, businessId]);
         setBusinessData(businessId);
       } else {
@@ -85,24 +91,18 @@ function Form(props: formProps) {
                 return;
               }
               if (interestId === null || interestId < 1) {
-                toast.info("Tiene que tener un interés seleccionado.", {
+                toast.info("Tem que ter um interesse selecionado.", {
                   position: toast.POSITION.BOTTOM_RIGHT,
                 });
                 return;
               }
               if (businessIds.length < 1) {
-                toast.info("Tiene que tener un negocio!", {
+                toast.info("Tem que ter um selecionado.", {
                   position: toast.POSITION.BOTTOM_RIGHT,
                 });
                 return;
               }
-              console.log("Información a enviar:", {
-                name,
-                email,
-                phone,
-                interestId,
-                businessIds,
-              });
+
               const res = await fetch("/api/clients", {
                 method: "POST",
                 body: JSON.stringify({
@@ -118,7 +118,6 @@ function Form(props: formProps) {
               });
 
               const data = await res.json();
-              console.log(data);
 
               if (data.message === "E-mail já cadastrado") {
                 toast.warning(
@@ -127,6 +126,10 @@ function Form(props: formProps) {
                     position: toast.POSITION.BOTTOM_RIGHT,
                   }
                 );
+                closeModal();
+                setTimeout(() => {
+                  window.location.reload();
+                }, 6000);
                 return;
               } else {
                 console.log(data);
@@ -135,11 +138,12 @@ function Form(props: formProps) {
                   position: toast.POSITION.BOTTOM_RIGHT,
                 });
                 closeModal();
+                setTimeout(() => {
+                  window.location.reload();
+                }, 6000);
               }
             } catch (error) {
               console.error("Erro ao processar a solicitação:", error);
-              console.log(error);
-
               toast.error("Algo deu errado, tente novamente!", {
                 position: toast.POSITION.BOTTOM_RIGHT,
               });
@@ -203,17 +207,23 @@ function Form(props: formProps) {
               />
             )}{" "}
             {currentStep === 2 && (
-              <div className="rounded-md py-10 bg-surface-500/95 p-2 ring-1 ring-white/10 w-full text-center h-auto">
-                <h3 className="h3 text-3xl font-semibold p-10">
-                  Estamos prontos!
-                </h3>
-                <button
-                  type="submit"
-                  className="btn variant-filled-primary"
-                  onClick={resetStep}
-                >
-                  Teste grátis
-                </button>
+              <div className="rounded-md bg-surface-500/95 ring-1 ring-primary-500/40 w-72 h-48 text-center shadow-sm shadow-primary-500/60">
+                <h3 className="h3 text-3xl font-semibold p-10">Vamos lá!</h3>
+                <div className="flex justify-evenly">
+                  <button
+                    className="btn variant-soft-primary text-primary-400"
+                    onClick={prevStep}
+                  >
+                    Voltar
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn variant-filled-primary text-white"
+                    onClick={resetStep}
+                  >
+                    Teste grátis
+                  </button>
+                </div>
               </div>
             )}
           </Modal>

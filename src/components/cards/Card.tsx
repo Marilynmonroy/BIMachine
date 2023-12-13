@@ -25,7 +25,7 @@ export default function Card(props: cardProps) {
   const baseCardStyle =
     "rounded-md py-5 bg-gradient-to-b from-white/5 ring-white/10 ring-1 items-center gap-3 w-1/4 align-center p-5";
   const enlargedCardStyle =
-    "rounded-md py-5 bg-primary-500 ring-white/10 ring-1 items-center gap-3 w-1/4 align-center p-5";
+    "rounded-md py-5 bg-primary-500 ring-white/10 ring-1 items-center gap-3 w-1/4 align-center p-5 transition duration-500";
 
   const baseTitleStyle = "h3 text-base font-semibold py-4";
   const enlargedTitleStyle = "h3 text-base font-semibold py-4 text-black";
@@ -46,7 +46,7 @@ export default function Card(props: cardProps) {
     >
       <button
         className={`${isHovered ? enlargedButtonStyle : baseButtonStyle} ${
-          isHovered ? "transform scale-110" : ""
+          isHovered ? "transform scale-110 transition duration-100" : ""
         }`}
       >
         {props.icon}
@@ -60,7 +60,11 @@ export default function Card(props: cardProps) {
         </p>
       </div>
       {isHovered && (
-        <a href={props.href} target="_blank" className="btn variant-filled">
+        <a
+          href={props.href}
+          target="_blank"
+          className="btn variant-filled transition duration-500"
+        >
           Saiba mais
         </a>
       )}

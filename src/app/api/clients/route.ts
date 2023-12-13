@@ -39,8 +39,8 @@ export async function POST(request: Request) {
         phone,
         interestId,
         businessIds: {
-          connect: businessIds.map((businessId: number) => ({
-            id: businessId,
+          create: businessIds.map((businessId: number) => ({
+            business: { connect: { id: businessId } },
           })),
         },
       },

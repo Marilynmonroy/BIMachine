@@ -32,6 +32,9 @@ dependencies:
   react-icons:
     specifier: ^4.12.0
     version: 4.12.0(react@18.2.0)
+  react-loading-skeleton:
+    specifier: ^3.3.1
+    version: 3.3.1(react@18.2.0)
   react-phone-number-input:
     specifier: ^3.3.7
     version: 3.3.7(react-dom@18.2.0)(react@18.2.0)
@@ -5138,6 +5141,14 @@ packages:
       shallow-equal: 1.2.1
       theming: 3.3.0(react@18.2.0)
       tiny-warning: 1.0.3
+    dev: false
+
+  /react-loading-skeleton@3.3.1(react@18.2.0):
+    resolution: {integrity: sha512-NilqqwMh2v9omN7LteiDloEVpFyMIa0VGqF+ukqp0ncVlYu1sKYbYGX9JEl+GtOT9TKsh04zCHAbavnQ2USldA==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-phone-number-input@3.3.7(react-dom@18.2.0)(react@18.2.0):

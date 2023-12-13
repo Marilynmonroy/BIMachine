@@ -12,9 +12,9 @@ model Client {
   name        String
   email       String             @unique
   phone       String
-  interest    Interests?         @relation(fields: [interestId], references: [id])
-  interestId  Int?               @unique
+  interestId  Int?
   businessIds BusinessOnClient[]
+  interest    Interests?         @relation(fields: [interestId], references: [id])
 
   @@map("cliente")
 }
@@ -36,10 +36,10 @@ model Business {
 }
 
 model BusinessOnClient {
-  business   Business? @relation(fields: [businessId], references: [id])
   businessId Int
-  client     Client?   @relation(fields: [clientId], references: [id])
   clientId   String
+  business   Business @relation(fields: [businessId], references: [id])
+  client     Client   @relation(fields: [clientId], references: [id])
 
   @@id([businessId, clientId])
   @@map("business_client")
