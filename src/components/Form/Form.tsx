@@ -59,7 +59,7 @@ function Form(props: formProps) {
         setBusinessIds([...businessIds, businessId]);
         setBusinessData(businessId);
       } else {
-        toast.warning("Ya has seleccionado tres opciones", {
+        toast.warning("Selecione apenas três opções.", {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
       }
