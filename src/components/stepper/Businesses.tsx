@@ -32,10 +32,6 @@ export default function Businesses(props: businessesProps) {
       setSelectedBusiness(selectedBusiness.filter((id) => id !== businessId));
     } else if (selectedBusiness.length < 3) {
       setSelectedBusiness([...selectedBusiness, businessId]);
-    } else {
-      toast.warning("Ya has seleccionado tres opciones", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-      });
     }
     props.onSelectBusiness && props.onSelectBusiness(businessId);
   };
