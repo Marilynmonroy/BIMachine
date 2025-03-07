@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BiMachine - Landing Page de Captación de Clientes
 
-## Getting Started
+Este proyecto es una landing page diseñada para la captación de clientes de BiMachine, una empresa especializada en el análisis de datos para diversas empresas en Brasil.
 
-First, run the development server:
+## Tecnologías Utilizadas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **TypeScript**: Para un desarrollo robusto y con tipado seguro.
+- **PostgreSQL**: Base de datos utilizada para almacenar la información de los clientes.
+- **Docker**: Para la contenedorización y fácil despliegue del entorno.
+- **React**: Framework de desarrollo de la interfaz de usuario.
+- **Node.js**: Backend para la gestión de datos y lógica del negocio.
+- **Tailwind CSS**: Para el diseño estilizado y responsive de la interfaz.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Instalación y Ejecución
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clonar el repositorio:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```sh
+   git clone https://github.com/tu_usuario/bi-machine-landing.git
+   cd bi-machine-landing
+   ```
 
-## Learn More
+2. Instalar dependencias:
 
-To learn more about Next.js, take a look at the following resources:
+   ```sh
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Configurar variables de entorno: Crear un archivo `.env` en la raíz del proyecto y agregar:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```env
+   DATABASE_URL=postgresql://usuario:contraseña@localhost:5432/bi_machine_db
+   ```
 
-## Deploy on Vercel
+4. Levantar el entorno de desarrollo:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```sh
+   npm run dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+5. Para ejecutar con Docker:
+
+   ```sh
+   docker-compose up --build
+   ```
+
+## Despliegue
+
+Para desplegar en producción, se recomienda utilizar plataformas como Vercel, Netlify o un servidor propio con Docker.
+
+## Contribución
+
+Si deseas contribuir, por favor realiza un fork del repositorio y envía un Pull Request con tus mejoras.
+
+## Licencia
+
+Este proyecto está bajo la licencia MIT. Siente la libertad de usarlo y modificarlo según sea necesario.
