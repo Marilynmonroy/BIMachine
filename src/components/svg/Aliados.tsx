@@ -1,6 +1,5 @@
 interface aliadosProps {
-  width: string;
-  height: string;
+  className: string;
 }
 
 const Aliados = (props: aliadosProps) => {
@@ -9,8 +8,7 @@ const Aliados = (props: aliadosProps) => {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         data-name="Layer 1"
-        width={props.width}
-        height={props.height}
+        className={props.className}
         viewBox="0 0 995 697.68102"
       >
         <path
@@ -387,10 +385,7 @@ const Aliados = (props: aliadosProps) => {
           transform="translate(407.97009 1481.40327) rotate(179.99738)"
           fill="#2f2e41"
         />
-        <polygon
-          points="21.882 671.495 31.978 677.045 58.19 640.747 43.291 632.555 21.882 671.495"
-          fill="#ffb8b8"
-        />
+        <polygon points="21.882 671.495 31.978 677.045 58.19 640.747 43.291 632.555 21.882 671.495" fill="#ffb8b8" />
         <path
           d="M118.19573,776.43687h36.20742a0,0,0,0,1,0,0V790.4261a0,0,0,0,1,0,0h-22.2182a13.98922,13.98922,0,0,1-13.98922-13.98922v0a0,0,0,0,1,0,0Z"
           transform="translate(-224.19403 1434.45667) rotate(-151.19904)"

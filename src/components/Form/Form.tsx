@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Input from "./Input";
 import InputPhone from "./InputPhone";
-import { ToastContainer, toast } from "react-toastify";
+import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "../Modal";
 import Interest from "../stepper/Interest";
@@ -70,7 +70,7 @@ function Form(props: formProps) {
 
   return (
     <>
-      <div className="basis-1/2 flex justify-evenly h-[35rem] ">
+      <div className="flex justify-center w-full md:basis-2/5">
         <form
           onSubmit={async (e) => {
             e.preventDefault();
@@ -82,12 +82,9 @@ function Form(props: formProps) {
                 return;
               }
               if (phone.length < 10) {
-                toast.info(
-                  "O número de telefone deve ter pelo menos 10 dígitos!",
-                  {
-                    position: toast.POSITION.BOTTOM_RIGHT,
-                  }
-                );
+                toast.info("O número de telefone deve ter pelo menos 10 dígitos!", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
                 return;
               }
               if (interestId === null || interestId < 1) {
@@ -120,12 +117,9 @@ function Form(props: formProps) {
               const data = await res.json();
 
               if (data.message === "E-mail já cadastrado") {
-                toast.warning(
-                  "O e-mail já está registrado. Tente acessar sua conta.",
-                  {
-                    position: toast.POSITION.BOTTOM_RIGHT,
-                  }
-                );
+                toast.warning("O e-mail já está registrado. Tente acessar sua conta.", {
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
                 closeModal();
                 setTimeout(() => {
                   window.location.reload();
@@ -149,54 +143,46 @@ function Form(props: formProps) {
               });
             }
           }}
-          className="rounded-md py-10 bg-surface-500/95 p-2 ring-1 ring-white/10 max-w-sm text-center h-auto"
+          className="rounded-md md:py-10 p-4 bg-surface-500/95 md:px-6 ring-1 ring-white/10 w-full max-w-md md:max-w-lg text-center h-auto"
         >
-          <h3 className="h3 text-3xl font-semibold">Crie sua conta</h3>
-          <div>
-            <div className="py-5">
-              <Input
-                id="email"
-                value={email}
-                type="email"
-                autoComplete="email"
-                placeholder="E-mail"
-                title={"E-mail *"}
-                onChange={setEmail}
-              />
-              <Input
-                id="name"
-                value={name}
-                type="text"
-                autoComplete="name"
-                placeholder="Nome ou empresa"
-                title={"Nome ou empresa *"}
-                onChange={setName}
-              />
-              <InputPhone
-                id={"phone"}
-                value={phone}
-                onChange={setPhone}
-                autoComplete={"phone"}
-                placeholder={"Telefone"}
-                title={"Telefone *"}
-              />
-            </div>
+          <h3 className="text-xl md:text-3xl font-semibold text-white">Crie sua conta</h3>
+          <div className="py-0 md:py-5">
+            <Input
+              id="email"
+              value={email}
+              type="email"
+              autoComplete="email"
+              placeholder="E-mail"
+              title={"E-mail *"}
+              onChange={setEmail}
+            />
+            <Input
+              id="name"
+              value={name}
+              type="text"
+              autoComplete="name"
+              placeholder="Nome ou empresa"
+              title={"Nome ou empresa *"}
+              onChange={setName}
+            />
+            <InputPhone
+              id={"phone"}
+              value={phone}
+              onChange={setPhone}
+              autoComplete={"phone"}
+              placeholder={"Telefone"}
+              title={"Telefone *"}
+            />
           </div>
           <button
             type="button"
             className="btn variant-filled-primary"
-            onClick={openModal}
+            // onClick={openModal}
           >
             Crie sua conta
           </button>
           <Modal visible={modalVisible} onClose={closeModal}>
-            {currentStep === 0 && (
-              <Interest
-                id={0}
-                onNextStep={nextStep}
-                onSelectInterest={handleInterestSelection}
-              />
-            )}
+            {currentStep === 0 && <Interest id={0} onNextStep={nextStep} onSelectInterest={handleInterestSelection} />}
             {currentStep === 1 && (
               <Business
                 id={0}
@@ -205,29 +191,22 @@ function Form(props: formProps) {
                 onSelectBusiness={handleBusinessSelection}
                 selectedInterest={interestId}
               />
-            )}{" "}
+            )}
             {currentStep === 2 && (
               <div className="rounded-md bg-surface-500/95 ring-1 ring-primary-500/40 w-72 h-48 text-center shadow-sm shadow-primary-500/60">
-                <h3 className="h3 text-3xl font-semibold p-10">Vamos lá!</h3>
+                <h3 className="text-3xl font-semibold p-10">Vamos lá!</h3>
                 <div className="flex justify-evenly">
-                  <button
-                    className="btn variant-soft-primary text-primary-400"
-                    onClick={prevStep}
-                  >
+                  <button className="btn variant-soft-primary text-primary-400" onClick={prevStep}>
                     Voltar
                   </button>
-                  <button
-                    type="submit"
-                    className="btn variant-filled-primary text-white"
-                    onClick={resetStep}
-                  >
+                  <button type="submit" className="btn variant-filled-primary text-white" onClick={resetStep}>
                     Teste grátis
                   </button>
                 </div>
               </div>
             )}
           </Modal>
-          <p className="text-xs p-5 pb-0">
+          <p className="text-xs p-5 pb-0 text-white">
             Criando sua conta BIMACHINE você aceita os nossos {""}
             <a
               href="https://support.bimachine.com.br/termos-de-uso-e-servicos/"

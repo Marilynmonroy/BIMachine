@@ -7,7 +7,7 @@ import What from "@/components/What";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen bg-surface-500 flex-col justify-between p-24">
+    <main className="flex min-h-screen bg-surface-500 text-white flex-col justify-between lg:p-24">
       <Principal />
       <What />
       <Partner />

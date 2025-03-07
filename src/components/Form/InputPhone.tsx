@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 
@@ -14,10 +14,8 @@ interface inputPhoneProps {
 
 function InputPhone(props: inputPhoneProps) {
   return (
-    <label className="py-4 justify-items-center px-[78px]">
-      <span className="block text-sm font-medium text-left text-white pb-2">
-        {props.title}
-      </span>
+    <label className="py-4 m-auto md:w-5/6">
+      <span className="block text-sm font-medium text-left text-white pb-2">{props.title}</span>
       <PhoneInput
         id={props.id}
         autoComplete={props.autoComplete}
@@ -25,7 +23,8 @@ function InputPhone(props: inputPhoneProps) {
         value={props.value}
         onChange={(value: any) => props.onChange?.(value)}
         defaultCountry="BR"
-        rules={{ required: true }}
+        disabled
+        rules={{required: true}}
         numberInputProps={{
           className:
             "rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 sm:text-sm sm:leading-6",
